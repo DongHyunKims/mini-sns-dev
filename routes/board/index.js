@@ -1,87 +1,8 @@
 
 /**
  * Created by donghyunkim on 2017. 4. 3..
- */
-var express = require("express");
-var router = express.Router();
-var path = require("path");
-var bodyParser = require("body-parser");
-var Q = require("q");
-var multerFile= require("multer")
-
-router.use(bodyParser.json());
-router.use(bodyParser.urlencoded({extended : true}));
-
-var dbConnection =  require("../../model/dbConnection");
-
-const INSERT_BOARD_SQL = "INSERT INTO BOARD_TB VALUES(DEFAULT,?,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,?);";
-
-
-router.get("/",function(req,res){
-    res.sendFile(path.join(__dirname, "../../public/html/board/boardWrite.html"));
-});
-
-
-router.post("/insertBoard",function(req,res){
-        let data = req.body;
-        let user_id = 1;
-
-        data["user_id"] = user_id;
-        console.log("data",data);
-
-
-
-        dbConnection.query(INSERT_BOARD_SQL,[data.content,data.user_id],function(err, rows){
-        if(err) throw err;
-        else{
-            res.json(rows);
-        }
-
-
-        // upload(req, res).then(function (file) {
-        //     console.log("file",file)
-        //
-        // }, function (err) {
-        // res.send(500, err);
-        // });
-
-
-
-
-
-    });
-
-});
-
-//
-// var upload = function(req,res){
-//     let deferred = Q.defer();
-//     let storage = multerFile.diskStorage({
-//         //경로 도찯지
-//         destination: function (req, file, callback) {
-//             callback(null,  path.join(__dirname, "../../public/images/upload/"));
-//         },
-//         //server 저장 폴더 지정
-//         filename: function (req,file,callback) {
-//             file.uploadedFile = {
-//                 name : req.body.imgUrl,
-//                 //확장자
-//                 ext : file.mimetype.split('/')[1]
-//             };
-//             callback(null,file.uploadedFile.name + '.' + file.uploadedFile.ext);
-//         }
-//     });
-//     var upload = multerFile({ storage: storage }).single('file');
-//     upload(req, res, function (err) {
-//         if (err) deferred.reject();
-//         else deferred.resolve(req.file.uploadedFile);
-//     });
-//     return deferred.promise;
-//
-// };
-
-/*
-
+ *
+ *
  {}
 
  { fieldname: 'myfile',
@@ -101,6 +22,70 @@ router.post("/insertBoard",function(req,res){
  size: 1268337 }
 
  */
+
+
+
+var express = require("express");
+var router = express.Router();
+var path = require("path");
+var bodyParser = require("body-parser");
+var multer = require("multer");
+
+
+router.use(express.static('public'));
+
+
+var storage = multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, 'public/images/uploads');
+    },
+    filename: function (req, file, callback) {
+        callback(null, file.fieldname+ '-' + Date.now() + "." +file.mimetype.split("/")[1])
+    }
+});
+
+var upload = multer({ storage: storage });
+
+
+
+
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({extended : true}));
+
+
+
+var dbConnection =  require("../../model/dbConnection");
+
+const INSERT_BOARD_SQL = "INSERT INTO BOARD_TB VALUES(DEFAULT,?,?,DEFAULT,DEFAULT,DEFAULT,DEFAULT,?)";
+
+
+router.get("/",function(req,res){
+    res.sendFile(path.join(__dirname, "../../public/html/board/boardWrite.html"));
+});
+
+
+router.post("/insertBoard",upload.single('imgFile'),function(req,res){
+
+    // console.log(req.body); //form fields
+    // console.log(req.file.path); //form file
+        let data = req.body;
+        let imgUrl = req.file.path;
+        //session 처리
+        let user_id = 1;
+
+        if(imgUrl === "" || imgUrl === undefined) imgUrl  = "public/images/default/default-thumbnail.jpg";
+
+        dbConnection.query(INSERT_BOARD_SQL,[data.content,imgUrl,user_id],function(err, rows){
+        if(err) throw err;
+        else {
+            res.json(rows);
+        }
+    });
+
+});
+
+
+
 
 
 

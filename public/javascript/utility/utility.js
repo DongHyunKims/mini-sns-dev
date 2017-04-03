@@ -14,13 +14,16 @@ var utility = {
         xhr.open(method, url);
         oReq.send();
     },
-    runAjaxJson : function(reqListener, method, url, data){
+    runAjaxJson : function(reqListener, method, url, data, contentType){
 
         var xhr = new XMLHttpRequest();
         //reqListener 제일 마지막에 실행된다.
 
         xhr.open(method, url);
-        xhr.setRequestHeader("Content-Type","application/json");
+        //xhr.setRequestHeader("Content-Type","application/json");
+        if(contentType !== undefined)
+        xhr.setRequestHeader("Content-Type",contentType);
+
         xhr.send(data);
         xhr.addEventListener("load", reqListener);
     },

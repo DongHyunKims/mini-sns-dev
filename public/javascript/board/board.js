@@ -20,13 +20,15 @@
         }
         else {
 
+            var formData = new FormData();
+            formData.append("imgFile", imgFile);
+            formData.append("content", content);
+            utility.runAjaxJson(reqListener, "post", defaultURL + "/board/insertBoard",formData );
 
-            let data = {
-                content: content,
-                imgFile: imgFile,
-            };
-            data = JSON.stringify(data);
-            utility.runAjaxJson(reqListener, "post", defaultURL + "/board/insertBoard", data);
+
+
+
+
         }
     });
 
