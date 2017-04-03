@@ -5,7 +5,7 @@ var express = require("express");
 var app = express();
 var main = require("./routes");
 var board = require("./routes/board");
-//var login = require("./routes/login");
+var login = require("./routes/login");
 //var signup = require("./routes/signup");
 
 var bodyParser = require("body-parser");
@@ -18,7 +18,7 @@ app.set("view engine", "ejs");
 
 app.use("/", main);
 app.use("/board", board);
-//app.use("/login", login);
+app.use("/login", login);
 //app.use("/signup", signup);
 
 
