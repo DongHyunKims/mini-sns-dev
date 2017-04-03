@@ -8,6 +8,8 @@ var board = require("./routes/board");
 //var login = require("./routes/login");
 //var signup = require("./routes/signup");
 
+
+
 var bodyParser = require("body-parser");
 
 app.use(express.static('public'));
@@ -16,10 +18,11 @@ app.use(bodyParser.urlencoded({extended : true}));
 app.set("view engine", "ejs");
 
 
-app.use("/", main);
+app.use("/main", main);
 app.use("/board", board);
 //app.use("/login", login);
 //app.use("/signup", signup);
+
 
 
 app.listen(3000, function(){

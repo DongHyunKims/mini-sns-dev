@@ -34,26 +34,29 @@
     </div>
 
     <div class="middle_block">
-        <!-- 게시물 부분, template 등..-->
         <div class="board_side_block"></div>
         <div class="board_main_block">
+
 
             <div class="board_input_block">
                 <div class="board_write_title_block">
                     <span>게시물 작성</span>
                 </div>
-
+                <!--<form id="board_write_form">-->
                 <div class="board_textarea_block">
-                        <textarea  placeholder="Write Something…"></textarea>
-
+                        <textarea  placeholder="Write Something…" name="content" id="content_box" required></textarea>
                 </div>
-
                 <div class="board_button_block">
                     <div class="board_upload_block">
-                        <img src="../../images/icons/Screenshot-100.png" class="icon_img" id="screenshot_icon"/>
+
+                        <label for="img-file-input" id="upload_img">
+                            <img src="../../images/icons/Screenshot-100.png" class="icon_img" id="screenshot_icon"/>
+                        </label>
+
+                        <input id="img-file-input" type="file"/>
+
                     </div>
                     <div class="board_confirm_block">
-
                         <label class="switch">
                             <input type="checkbox">
                             <div class="slider round"></div>
@@ -61,11 +64,10 @@
                         <button class="btn success" id="confirm_btn">Comfirm</button>
                     </div>
                 </div>
-
+                <!--</form>-->
             </div>
         </div>
         <div class="board_side_block"></div>
-
     </div>
 
     <div class="side_block">
@@ -78,6 +80,10 @@
 <footer class="main_footer">
 
 </footer>
+
+<script src="../../javascript/utility/utility.js"></script>
+<script src="../../javascript/board/board.js"></script>
+
 
 
 </body>
