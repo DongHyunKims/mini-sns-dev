@@ -51,7 +51,7 @@ h1 {
   margin: 0 40px 35px 40px;
 }
 
-button {
+.btn-login {
     line-height: 28px;
     font-size: 16px;
     padding: 0 8px;
@@ -67,10 +67,14 @@ button {
 }
 
 .main__sign-up {
-    margin: 15px 140px 20px;
+    margin: 15px 147px 20px;
 }
 
-a {
+.btn-login > a {
+    color: white;
+}
+
+.main__sign-up > a {
     width: 100%;
     color: #3897f0;
     font-family: Helvetica;
