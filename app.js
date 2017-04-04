@@ -8,8 +8,6 @@ var board = require("./routes/board");
 //var login = require("./routes/login");
 //var signup = require("./routes/signup");
 
-
-
 var bodyParser = require("body-parser");
 
 app.use(express.static('public'));
