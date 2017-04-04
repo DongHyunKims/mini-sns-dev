@@ -30,7 +30,8 @@ router.post("/insertSignup",function(req,res){
 	var data = req.body;
 	var responseData = {};
 	
-	var insert = connection.query('insert into user_tb(USER_EAMIL, USER_PASSWARD, USER_NAME, USER_NICKNAME) values(' + '"' +data.email+ '", "' + data. password + '", "'+ data.name + '", "' + data.nickname+ '"' +')', function(err,rows){
+	var sql = {USER_EAMIL:data.email, USER_PASSWARD:data.password, USER_NAME:data.name, USER_NICKNAME:data.nickname}
+	var insert = connection.query('insert into user_tb set ? ', sql, function(err,rows){
 		console.log("rows");
 		console.log(rows);		
 		if(err){
@@ -47,6 +48,42 @@ router.post("/insertSignup",function(req,res){
 	console.log("insert");  
 	console.log(insert);
 	
+	//성공했는거
+//	var insert = connection.query('insert into user_tb(USER_EAMIL, USER_PASSWARD, USER_NAME, USER_NICKNAME) values(?, ?, ?, ?)',[data.email, data.password, data.name, data.nickname], function(err,rows){
+//		console.log("rows");
+//		console.log(rows);		
+//		if(err){
+//			throw err;
+//		}
+//		
+//		if(rows[0]){
+//			console.log(rows[0]);		
+//		} else{
+//			console.log("none");
+//		}
+//		res.json(responseData);
+//	})
+//	console.log("insert");  
+//	console.log(insert);
+//	
+	
+//	var insert = connection.query('insert into user_tb(USER_EAMIL, USER_PASSWARD, USER_NAME, USER_NICKNAME) values(' + '"' +data.email+ '", "' + data. password + '", "'+ data.name + '", "' + data.nickname+ '"' +')', function(err,rows){
+//		console.log("rows");
+//		console.log(rows);		
+//		if(err){
+//			throw err;
+//		}
+//		
+//		if(rows[0]){
+//			console.log(rows[0]);		
+//		} else{
+//			console.log("none");
+//		}
+//		res.json(responseData);
+//	})
+//	console.log("insert");  
+//	console.log(insert);
+//	
 //	var query = connection.query('select _ID, USER_EAMIL, USER_PASSWARD, USER_NAME, USER_NICKNAME from user_tb', function(err,rows){
 //		if(err){
 //			throw err;
