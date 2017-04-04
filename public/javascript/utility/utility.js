@@ -14,7 +14,7 @@ var utility = {
         xhr.open(method, url);
         oReq.send();
     },
-    runAjaxJson : function(reqListener, method, url, data, contentType){
+    runAjaxData : function(reqListener, method, url, data, contentType){
 
         var xhr = new XMLHttpRequest();
         //reqListener 제일 마지막에 실행된다.
