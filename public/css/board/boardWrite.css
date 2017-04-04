@@ -89,13 +89,6 @@
     height: 34px;
 }
 
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
-}
-
 .switch input {display:none;}
 
 .slider {

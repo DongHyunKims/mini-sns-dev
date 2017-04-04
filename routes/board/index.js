@@ -56,7 +56,7 @@ router.use(bodyParser.urlencoded({extended : true}));
 
 var dbConnection =  require("../../model/dbConnection");
 
-const INSERT_BOARD_SQL = "INSERT INTO BOARD_TB VALUES(DEFAULT,?,?,DEFAULT,DEFAULT,DEFAULT,DEFAULT,?)";
+const INSERT_BOARD_SQL = "INSERT INTO BOARD_TB VALUES(DEFAULT,?,?,?,DEFAULT,DEFAULT,DEFAULT,?)";
 
 
 router.get("/",function(req,res){
@@ -75,7 +75,7 @@ router.post("/insertBoard",upload.single('imgFile'),function(req,res){
 
         if(imgUrl === "" || imgUrl === undefined) imgUrl  = "public/images/default/default-thumbnail.jpg";
 
-        dbConnection.query(INSERT_BOARD_SQL,[data.content,imgUrl,user_id],function(err, rows){
+        dbConnection.query(INSERT_BOARD_SQL,[data.content,imgUrl,Number(data.state),user_id],function(err, rows){
         if(err) throw err;
         else {
             res.json(rows);
