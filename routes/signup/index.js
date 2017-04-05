@@ -8,15 +8,7 @@ var router = express.Router();
 var path = require('path');
 module.exports = router;
 
-//DB연결부분
-var mysql = require('mysql')
-var connection = mysql.createConnection({
-	host: 'localhost',
-	user: 'bk',
-	password: 'test1234',
-	database: 'instabookDB'
-})
-connection.connect();
+
 
 // hwigyumKIM 작성부분
 router.get("/", function(req,res){
@@ -48,7 +40,18 @@ router.post("/insertSignup",function(req,res){
 	console.log("insert");  
 	console.log(insert);
 	
-	//성공했는거
+
+//테스트용 DB연결부분
+// var mysql = require('mysql')
+// var connection = mysql.createConnection({
+// 	host: 'localhost',
+// 	user: 'bk',
+// 	password: 'test1234',
+// 	database: 'instabookDB'
+// })
+// connection.connect();
+
+//성공했는거
 //	var insert = connection.query('insert into user_tb(USER_EAMIL, USER_PASSWARD, USER_NAME, USER_NICKNAME) values(?, ?, ?, ?)',[data.email, data.password, data.name, data.nickname], function(err,rows){
 //		console.log("rows");
 //		console.log(rows);		
