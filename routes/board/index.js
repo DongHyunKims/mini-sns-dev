@@ -84,13 +84,4 @@ router.post("/insertBoard",upload.single('imgFile'),function(req,res){
 
 });
 
-
-
-
-
-
-
-
-
-
 module.exports = router;
