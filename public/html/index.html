@@ -72,6 +72,7 @@
     {{#each boardViewlist}}
     <div class="board_view_block">
 
+
         <header class="board_header">
 
         <div class="board_user_info_block">
@@ -94,12 +95,21 @@
             <div class="board_like_menu_block">
 
                 <div class="board_like_block">
-                    <div class="board_like_img_block"><img src="../images/icons/Thumb%20Up-64.png" class="icon_img"/></div>
+                    <div class="board_like_img_block">
+                        <input type="hidden" class="board_user_id" value="{{this._id}}_{{this.userId}}"/>
+                        <input type="hidden" class="like_state" value="0">
+                        <img src="../images/icons/Like-50.png" class="icon_img like_btn"/>
+                    </div>
                     <div class="board_like_text_block">{{this.boardLikeCnt}}</div>
                 </div>
 
-                <div class="board_menu_block">
-                    <img src="../images/icons/more-50.png" class="icon_img"/>
+                <div class="board_menu_block dropdown">
+                    <img src="../images/icons/more-50.png" class="icon_img dropbtn"/>
+                    <div class="board_menu dropdown-content">
+                        <input type="hidden" class="board_id" value="{{this._id}}"/>
+                        <div class="board_update" >게시물 수정</div>
+                        <div class="board_delete">게시물 삭제</div>
+                    </div>
                 </div>
             </div>
 

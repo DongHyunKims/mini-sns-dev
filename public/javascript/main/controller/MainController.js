@@ -28,6 +28,12 @@ const mainControllerPrototype = {
     },
     renderingMainViewHandler : function(data){
         this.mainView.render(data);
+    },
+    deleteBoardHandler : function(_id,reqListener){
+        utility.runAjaxData(reqListener,"post","http://localhost:3000/board/deleteBoards",JSON.stringify({boardId : _id}),"application/json");
+    },
+    checkLikeBoardHandler : function(_id,userId,state,reqListener){
+        utility.runAjaxData(reqListener,"post","http://localhost:3000/board/checkLikeBoards",JSON.stringify({boardId : _id,userId : userId, state: state}),"application/json");
     }
 };
 
@@ -38,7 +44,12 @@ function MainController(mainView,boardViewModelList) {
     let _this = this;
     // 등록
     mainView.initMainViewEvent.register({"type": "initMainViewHandler"},_this,_this.initMainViewHandler);
-    boardViewModelList.renderingMainViewEvent.register({"type": "renderingMainViewHandler"},_this,_this.renderingMainViewHandler)
+    mainView.boardDeleteEvent.register({"type" : "deleteBoardHandler"},_this,_this.deleteBoardHandler);
+    mainView.checkLikeEvent.register({"type" : "checkLikeBoardHandler"},_this,_this.checkLikeBoardHandler);
+
+
+    boardViewModelList.renderingMainViewEvent.register({"type": "renderingMainViewHandler"},_this,_this.renderingMainViewHandler);
+
 
 }
 

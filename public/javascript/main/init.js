@@ -27,10 +27,7 @@ const defaultUrl = "http://localhost:3000";
 
     //ajax 콜백함수
     function reqListener(res) {
-        //console.log("res",res);
         let jsonDatas = JSON.parse(this.responseText);
-        //console.log(JSON.stringify(jsonDatas));
-        //console.log("mainController",mainController);
         mainView.initMainViewEvent.emit([{"type": "initMainViewHandler"}], [jsonDatas]);
     }
 

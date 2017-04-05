@@ -21,8 +21,9 @@ const utility = {
 
         xhr.open(method, url);
         //xhr.setRequestHeader("Content-Type","application/json");
-        if(contentType !== undefined)
+        if(contentType !== undefined){
         xhr.setRequestHeader("Content-Type",contentType);
+        }
 
         xhr.send(data);
         xhr.addEventListener("load", reqListener);
