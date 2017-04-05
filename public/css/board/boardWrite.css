@@ -1,11 +1,14 @@
 .board_input_block {
-    flex-basis: 60%;
+    width: 80%;
     /*background-color: lightcoral;*/
-    height: 80%;
+    height: 400px;
+    margin: auto;
+    margin-top: 10%;
     display: flex;
     flex-direction: column;
     border: lightgray 1px solid;
     padding: 1.5%;
+
 }
 
 .board_write_title_block {

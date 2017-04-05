@@ -8,6 +8,8 @@ var mysql = require("mysql");
 const dbConfig  = fs.readFileSync("/instabookDatacnf/instabookDataConfig.json","utf-8");
 
 const dbConnection = mysql.createConnection(JSON.parse(dbConfig));
+
+
 dbConnection.connect();
 
 module.exports = dbConnection;

@@ -36,7 +36,6 @@ function MainController(mainView,boardViewModelList) {
     this.mainView = mainView;
     this.boardViewModelList = boardViewModelList;
     let _this = this;
-
     // 등록
     mainView.initMainViewEvent.register({"type": "initMainViewHandler"},_this,_this.initMainViewHandler);
     boardViewModelList.renderingMainViewEvent.register({"type": "renderingMainViewHandler"},_this,_this.renderingMainViewHandler)

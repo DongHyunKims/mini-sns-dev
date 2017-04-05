@@ -18,7 +18,7 @@ const defaultUrl = "http://localhost:3000";
     // 초기화
 
     document.addEventListener("DOMContentLoaded", function() {
-        let renderingDom = utility.$selector(".board_main_middle_block");
+        let renderingDom = utility.$selector(".board_main_block");
         mainView = new MainView(renderingDom);
         boardViewModelList = new BoardViewModelList([]);
         mainController = new MainController(mainView,boardViewModelList);

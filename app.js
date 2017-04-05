@@ -1,14 +1,14 @@
 /**
  * Created by donghyunkim on 2017. 3. 28..
  */
-var express = require("express");
-var app = express();
-var main = require("./routes");
-var board = require("./routes/board");
+const express = require("express");
+const app = express();
+const main = require("./routes");
+const board = require("./routes/board");
 //var login = require("./routes/login");
 //var signup = require("./routes/signup");
 
-var bodyParser = require("body-parser");
+const bodyParser = require("body-parser");
 
 app.use(express.static('public'));
 app.use(bodyParser.json());
