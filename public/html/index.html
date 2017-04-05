@@ -2,9 +2,119 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>INSTABOOK</title>
+
+    <link href="../css/index.css" rel="stylesheet" type="text/css"/>
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.js"></script>
+    <script  src="../javascript/lib/timeago.js"></script>
 </head>
 <body>
+
+
+    <header class="main_header">
+            <div class="logo_group_block">
+                <div class="logo_img_block">
+                    <img src="../images/icons/Instagram-100.png" id="logo_img" class="icon_img"/>
+                </div>
+                <div class="logo_text_block">
+                    <a href="http://localhost:3000/main/">INSTABOOK</a>
+                </div>
+                <div class="search_block">
+                    <input type="text" placeholder="Search">
+                </div>
+            </div>
+
+            <div class="menu_block">
+                <div><a href="http://localhost:3000/board"><img src="../images/icons/Edit-26.png" class="icon_img"/></a></div>
+                <div><img src="../images/icons/Logout%20Rounded%20Up-50.png" class="icon_img"/></div>
+            </div>
+    </header>
+
+
+    <section class="main_section">
+        <div class="side_block">
+        </div>
+
+        <div class="middle_block">
+            <!-- 게시물 부분, template 등..-->
+            <div class="board_side_block"></div>
+
+            <!--게시물이 들어가는 부분 -->
+            <div class="board_main_block">
+
+            </div>
+
+
+            <div class="board_side_block"></div>
+
+        </div>
+
+        <div class="side_block">
+
+        </div>
+    </section>
+
+
+
+    <footer class="main_footer">
+
+    </footer>
+
+<script src="../javascript/utility/utility.js"></script>
+<script src="../javascript/main/controller/Observer.js"></script>
+<script src="../javascript/main/model/BoardViewModel.js"></script>
+<script src="../javascript/main/model/BoardViewModelList.js"></script>
+<script src="../javascript/main/view/MainView.js"></script>
+<script src="../javascript/main/controller/MainController.js"></script>
+<script src="../javascript/main/init.js"></script>
+
+<script  type="text/x-handlebars-template" id="board_view">
+    {{#each boardViewlist}}
+    <div class="board_view_block">
+
+        <header class="board_header">
+
+        <div class="board_user_info_block">
+            <div class="board_profile_img_block"><img class="img-circle" src="{{this.userProfileImgUrl}}"></div>
+            <div class="board_profile_nickname_block">{{this.userNickname}}</div>
+        </div>
+
+        <div class="board_date_info_block">
+            {{this.boardCreatedDate}}
+        </div>
+        </header>
+
+        <section class="board_section">
+         <img src="{{this.boardImgUrl}}"/>
+        </section>
+
+
+        <footer class="board_footer">
+
+            <div class="board_like_menu_block">
+
+                <div class="board_like_block">
+                    <div class="board_like_img_block"><img src="../images/icons/Thumb%20Up-64.png" class="icon_img"/></div>
+                    <div class="board_like_text_block">{{this.boardLikeCnt}}</div>
+                </div>
+
+                <div class="board_menu_block">
+                    <img src="../images/icons/more-50.png" class="icon_img"/>
+                </div>
+            </div>
+
+            <div class="board_write_block">
+                <div class="board_content_block">{{this.boardContent}}</div>
+            </div>
+
+        </footer>
+
+    </div>
+    {{/each}}
+</script>
+
+
+
 
 </body>
 </html>

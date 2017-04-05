@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>INSTABOOK</title>
+    <link href="../../css/index.css" rel="stylesheet" type="text/css"/>
+    <link href="../../css/board/boardWrite.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+
+<header class="main_header">
+    <div class="logo_group_block">
+        <div class="logo_img_block">
+            <img src="../../images/icons/Instagram-100.png" id="logo_img" class="icon_img"/>
+        </div>
+        <div class="logo_text_block">
+            <a href="http://localhost:3000/main/">INSTABOOK</a>
+        </div>
+        <div class="search_block">
+            <input type="text" placeholder="Search">
+        </div>
+    </div>
+
+    <div class="menu_block">
+        <div><img src="../../images/icons/Edit-26.png" class="icon_img"/></div>
+        <div><img src="../../images/icons/Logout%20Rounded%20Up-50.png" class="icon_img"/></div>
+    </div>
+</header>
+
+
+<section class="main_section">
+    <div class="side_block">
+    </div>
+
+    <div class="middle_block">
+        <div class="board_side_block"></div>
+        <div class="board_main_block">
+
+
+            <div class="board_input_block">
+                <div class="board_write_title_block">
+                    <span>게시물 작성</span>
+                </div>
+                <!--<form id="board_write_form">-->
+                <div class="board_textarea_block">
+                        <textarea  placeholder="Write Something…" name="content" id="content_box" required></textarea>
+                </div>
+                <div class="board_button_block">
+                    <div class="board_upload_block">
+
+                        <label for="img-file-input" id="upload_img">
+                            <img src="../../images/icons/Screenshot-100.png" class="icon_img" id="screenshot_icon"/>
+                        </label>
+
+                        <input id="img-file-input" type="file"/>
+
+                    </div>
+                    <div class="board_confirm_block">
+                        <label class="switch" id="state_toggle">
+                            <input type="checkbox" value="1">
+                            <div class="slider round"></div>
+                        </label>
+                        <button class="btn success" id="confirm_btn">Comfirm</button>
+                    </div>
+                </div>
+                <!--</form>-->
+            </div>
+        </div>
+        <div class="board_side_block"></div>
+    </div>
+
+    <div class="side_block">
+
+    </div>
+</section>
+
+
+
+<footer class="main_footer">
+
+</footer>
+
+<script src="../../javascript/utility/utility.js"></script>
+<script src="../../javascript/board/board.js"></script>
+
+
+
+</body>
+</html>
