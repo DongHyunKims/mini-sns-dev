@@ -7,8 +7,8 @@ var app = express();
 var bodyParser = require('body-parser')
 var router = express.Router();
 var path = require('path');
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy
+// var passport = require('passport');
+// var LocalStrategy = require('passport-local').Strategy
 
 
 /////////설정부분
@@ -18,14 +18,14 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 app.set('view engine', 'ejs')
 
-passport.serializeUser(function(user, done) {
-  console.log("passport session save : ", user)
-  done(null, user);
-});
-passport.deserializeUser(function(id, done) {
-    console.log("passport session get id : ", id)
-    done(null, id);
-});
+// passport.serializeUser(function(user, done) {
+//   console.log("passport session save : ", user)
+//   done(null, user);
+// });
+// passport.deserializeUser(function(id, done) {
+//     console.log("passport session get id : ", id)
+//     done(null, id);
+// });
 //////////////////////////////////////////////////
 
 
@@ -42,21 +42,14 @@ router.get("/", function(req,res){
 	// res.sendFile(path.join(__dirname, "../../public/html/signup/signup.html"))
 })
 
-
-passport.use('local-signup', new LocalStrategy({
-	usernameField: 'email',
-	passwordField: 'password',
-	passReqToCallback: true
-}, function(req,email,password, done){
-	console.log('local-signup callback enter');
-	// console.log(email, password);
-	// console.log(req.body)
+router.post('/', function(req,res){
+	console.log('/router/signup post enter');
 	var data = req.body;
 	var responseData = {};
 	
 	var sql = {USER_EAMIL:data.email, USER_PASSWARD:data.password, USER_NAME:data.name, USER_NICKNAME:data.nickname}
-	var query = dbConnection.query('select * from USER_TB where USER_EAMIL=?',[email] ,function(err,rows){
-		console.log(email)
+	var query = dbConnection.query('select * from USER_TB where USER_EAMIL=?',[data.email] ,function(err,rows){
+
 		console.log(rows)
 		if(err){
 			console.log('local-signup callback ERROR called');
@@ -65,17 +58,54 @@ passport.use('local-signup', new LocalStrategy({
 		if(rows.length){
 			//비정상인 경우
 			console.log("existed user")
-			return done(null, false, {message: "your email is already used"})
+			return res.redirect('/signup');
 		} else{
 			console.log("정상적인경우");
 			var query = dbConnection.query('insert into USER_TB set ?', sql, function(err,rows){
 				if(err) throw err
-				return done(null, {'email':email, 'id':rows.insertId, 'status':'ok'});
+				return res.redirect('/login');
 			})
 		}
 	})
-	}
-));
+})
+
+
+//프로그램 끝.
+module.exports = router;
+
+// passport.use('local-signup', new LocalStrategy({
+// 	usernameField: 'email',
+// 	passwordField: 'password',
+// 	passReqToCallback: true
+// }, function(req,email,password, done){
+// 	console.log('local-signup callback enter');
+// 	// console.log(email, password);
+// 	// console.log(req.body)
+// 	var data = req.body;
+// 	var responseData = {};
+	
+// 	var sql = {USER_EAMIL:data.email, USER_PASSWARD:data.password, USER_NAME:data.name, USER_NICKNAME:data.nickname}
+// 	var query = dbConnection.query('select * from USER_TB where USER_EAMIL=?',[email] ,function(err,rows){
+// 		console.log(email)
+// 		console.log(rows)
+// 		if(err){
+// 			console.log('local-signup callback ERROR called');
+// 			return done(err);
+// 		}
+// 		if(rows.length){
+// 			//비정상인 경우
+// 			console.log("existed user")
+// 			return done(null, false, {message: "your email is already used"})
+// 		} else{
+// 			console.log("정상적인경우");
+// 			var query = dbConnection.query('insert into USER_TB set ?', sql, function(err,rows){
+// 				if(err) throw err
+// 				return done(null, {'email':email, 'id':rows.insertId, 'status':'ok'});
+// 			})
+// 		}
+// 	})
+// 	}
+// ));
 
 // router.post('/', function(req,res){
 // 	console.log("/router/signup post")
@@ -85,15 +115,12 @@ passport.use('local-signup', new LocalStrategy({
 
 
 //***수정필요
-router.post('/', passport.authenticate('local-signup',{
-	successRedirect: '/board',
-	failureRedirect: '/signup',
-	failureFlash: true
-}))
+// router.post('/', passport.authenticate('local-signup',{
+// 	successRedirect: '/board',
+// 	failureRedirect: '/signup',
+// 	failureFlash: true
+// }))
 
-
-//프로그램 끝.
-module.exports = router;
 
 // router.post("/insertSignup",function(req,res){
 // 	console.log("/routes/signup/insertSignup");
