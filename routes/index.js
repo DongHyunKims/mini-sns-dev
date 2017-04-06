@@ -4,8 +4,8 @@
 var express = require("express");
 var router = express.Router();
 var path = require("path");
-
 var dbConnection = require("../model/dbConnection");
+
 
 const SELECT_ALL_BOARD_SQL = "SELECT * FROM BOARD_TB";
 const SELECT_ALL_BOARD_VIEW_SQL = "SELECT U._ID AS userId, U.USER_NICKNAME AS nickname, B.BOARD_CREATED_DATE AS boardCreateDate, B.BOARD_IMG_URL AS boardImgUrl, B.BOARD_PUBLIC_STATE AS boardState, B.BOARD_CONTENT AS boardContent, B._ID AS boardId, B.LIKE_CNT AS boardLikeCnt FROM USER_TB U JOIN BOARD_TB B ON U._ID = B.USER_ID";
