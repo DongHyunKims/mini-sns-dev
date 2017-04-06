@@ -59,7 +59,7 @@ passport.use('local-join', new LocalStrategy({
 
     passReqToCallback: true
     }, function(req, email, password, done) {
-        var query = dbConnection.query('SELECT * FROM USER_TB WHERE USER_EAMIL=? AND USER_PASSWORD=?', [email, password], function(err, rows) {
+        var query = dbConnection.query('SELECT * FROM USER_TB WHERE USER_EMAIL=? AND USER_PASSWORD=?', [email, password], function(err, rows) {
             if(err) return done(err);
 
             if (rows.length) {

@@ -47,8 +47,8 @@ router.post('/', function(req,res){
 	var data = req.body;
 	var responseData = {};
 	
-	var sql = {USER_EAMIL:data.email, USER_PASSWARD:data.password, USER_NAME:data.name, USER_NICKNAME:data.nickname}
-	var query = dbConnection.query('select * from USER_TB where USER_EAMIL=?',[data.email] ,function(err,rows){
+	var sql = {USER_EMAIL:data.email, USER_PASSWORD:data.password, USER_NAME:data.name, USER_NICKNAME:data.nickname}
+	var query = dbConnection.query('select * from USER_TB where USER_EMAIL=?',[data.email] ,function(err,rows){
 
 		console.log(rows)
 		if(err){
