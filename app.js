@@ -8,10 +8,20 @@ var board = require("./routes/board");
 var login = require("./routes/login");
 var user_info = require("./routes/login/user_info")
 //var signup = require("./routes/signup");
-
-
-
+var flash = require('connect-flash')
+var passport = require('passport')
+var LocalStrategy = require('passport-local').Strategy
+var session = require('express-session')
 var bodyParser = require("body-parser");
+
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true
+}))
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(flash())
 
 app.use(express.static('public'));
 app.use(bodyParser.json());
