@@ -100,13 +100,13 @@
                         <input type="hidden" class="like_state" value="0">
                         <img src="../images/icons/Like-50.png" class="icon_img like_btn"/>
                     </div>
-                    <div class="board_like_text_block">{{this.boardLikeCnt}}</div>
+                    <div class="board_like_text_block" id="b_{{this._id}}"></div>
                 </div>
 
                 <div class="board_menu_block dropdown">
                     <img src="../images/icons/more-50.png" class="icon_img dropbtn"/>
                     <div class="board_menu dropdown-content">
-                        <input type="hidden" class="board_id" value="{{this._id}}"/>
+                        <input type="hidden" class="board_id" value="{{this._id}}" />
                         <div class="board_update" >게시물 수정</div>
                         <div class="board_delete">게시물 삭제</div>
                     </div>

@@ -26,9 +26,12 @@ const defaultUrl = "http://localhost:3000";
 
 
     //ajax 콜백함수
-    function reqListener(res) {
+    function reqListener() {
         let jsonDatas = JSON.parse(this.responseText);
-        mainView.initMainViewEvent.emit([{"type": "initMainViewHandler"}], [jsonDatas]);
+        console.log(jsonDatas);
+
+
+        //mainView.initMainViewEvent.emit([{"type": "initMainViewHandler"}], [jsonDatas]);
     }
 
     document.addEventListener("DOMContentLoaded",utility.runAjax(reqListener,"GET",defaultUrl + "/board/getBoards"));

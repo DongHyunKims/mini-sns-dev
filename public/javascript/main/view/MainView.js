@@ -18,10 +18,7 @@ const mainViewPrototype = {
         mainTemplate = template({"boardViewlist": boardViewlModelist});
         this.renderingDom.innerHTML = mainTemplate;
         this._createTimeAgo();
-        this. _setEvent();
-
-
-
+        this._setEvent();
     },
     getRenderingDom : function(){
         return this.renderingDom;
@@ -39,7 +36,6 @@ const mainViewPrototype = {
                 this.boardDeleteEvent.emit([{"type":"deleteBoardHandler"}],[_id,this._deleteBoardReqListener]);
             }
         }.bind(this));
-
 
 
 
@@ -77,10 +73,17 @@ const mainViewPrototype = {
     _deleteBoardReqListener : function(){
         window.location.reload();
     },
-    _likeBoardReqListener : function(res){
-        //let jsonDatas = JSON.parse(this.responseText);
+    _likeBoardReqListener : function(){
+        let jsonDatas = JSON.parse(this.responseText);
         //mainView.initMainViewEvent.emit([{"type": "initMainViewHandler"}], [jsonDatas]);
-        console.log("res",res);
+
+        let likeData = jsonDatas[0];
+        let likeCount = likeData.count;
+        let boardId = likeData.boardId;
+
+        utility.$selector("#b_" +boardId).innerText = likeCount + " 개";
+
+        //let likeDom = document.querySelectorAll(board_like_text_block
     }
 };
 
