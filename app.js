@@ -13,6 +13,7 @@ var passport = require('passport')
 var LocalStrategy = require('passport-local').Strategy
 var session = require('express-session')
 var bodyParser = require("body-parser");
+var signup = require("./routes/signup");
 
 app.use(session({
     secret: 'keyboard cat',
@@ -33,7 +34,8 @@ app.use("/main", main);
 app.use("/board", board);
 app.use("/login", login);
 app.use("/user_info", user_info);
-//app.use("/signup", signup);
+app.use("/signup", signup);
+
 
 
 
