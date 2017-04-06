@@ -29,7 +29,7 @@ const router = express.Router();
 const path = require("path");
 const bodyParser = require("body-parser");
 const multer = require("multer");
-var async = require("async");
+
 
 router.use(express.static('public'));
 
