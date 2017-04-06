@@ -20,7 +20,7 @@ app.use(session({
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true
-}))
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
@@ -35,7 +35,7 @@ app.set("view engine", "ejs");
 app.use("/main", main);
 app.use("/board", board);
 app.use("/login", login);
-app.use("/user_info", user_info);
+app.use("/user_info", user_info.router);
 app.use("/signup", signup);
 
 

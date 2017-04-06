@@ -106,8 +106,14 @@ html, body {
     display: table-cell;
     float: left;
     margin-left: 10px;
+
 }
 
+.menu_block > div{
+    height: 30px;
+    vertical-align: middle;
+
+}
 .menu_block div img{
     vertical-align: middle;
 }

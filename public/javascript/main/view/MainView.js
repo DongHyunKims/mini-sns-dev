@@ -5,7 +5,7 @@
 
 const mainViewPrototype = {
 
-    render : function(boardViewlModelist) {
+    render : function(boardViewlModelist,userNickname) {
         let mainTemplate = document.querySelector("#board_view").innerText;
         //1. 등록한 mainTemplate을 compile 함
         let template = Handlebars.compile(mainTemplate);
@@ -14,11 +14,38 @@ const mainViewPrototype = {
         Handlebars.registerHelper("boardViewlist", function () {
             return boardViewlModelist;
         });
+
+
+        Handlebars.registerHelper('ifCond', function(lvalue, options) {
+            if (arguments.length < 2)
+                throw new Error("Handlebars Helper equal needs 2 parameters");
+            if( lvalue!=userNickname ) {
+                return options.inverse(this);
+            } else {
+                return options.fn(this);
+            }
+        });
+
+
         //3. json 데이터 삽입
         mainTemplate = template({"boardViewlist": boardViewlModelist});
         this.renderingDom.innerHTML = mainTemplate;
         this._createTimeAgo();
         this._setEvent();
+
+
+        let nameTemplate = document.querySelector("#login_nickname").innerText;
+
+        let nameRendertemplate = Handlebars.compile(nameTemplate);
+        Handlebars.registerHelper("userNickname", function () {
+            return userNickname;
+        });
+
+        nameTemplate = nameRendertemplate({userNickname:userNickname});
+        let nameRenderingDom = document.querySelector(".nickname_text");
+        nameRenderingDom.innerText = nameTemplate;
+
+
     },
     getRenderingDom : function(){
         return this.renderingDom;
@@ -43,9 +70,7 @@ const mainViewPrototype = {
             let likeDom = event.target;
 
             if(Array.from(likeDom.classList).indexOf("like_btn") !== -1){
-                let idList = likeDom.parentNode.firstChild.nextSibling.value.split("_");
-                let _id = idList[0];
-                let userId = idList[1];
+                let _id = likeDom.parentNode.firstChild.nextSibling.value;
                 let stateDom = likeDom.parentNode.childNodes.item(2).nextSibling;
                 let state = stateDom.value;
                 if(state==="0"){
@@ -55,12 +80,9 @@ const mainViewPrototype = {
                     likeDom.setAttribute("src","../images/icons/Like-50.png");
                     stateDom.setAttribute("value","0");
                 }
-                this.checkLikeEvent.emit([{"type":"checkLikeBoardHandler"}],[_id,userId,state,this._likeBoardReqListener]);
+                this.checkLikeEvent.emit([{"type":"checkLikeBoardHandler"}],[_id,state,this._likeBoardReqListener]);
             }
         }.bind(this));
-
-
-
 
     },
     _createTimeAgo : function(){
@@ -78,12 +100,12 @@ const mainViewPrototype = {
         //mainView.initMainViewEvent.emit([{"type": "initMainViewHandler"}], [jsonDatas]);
 
         let likeData = jsonDatas[0];
+        //console.log(likeData);
         let likeCount = likeData.count;
         let boardId = likeData.boardId;
 
         utility.$selector("#b_" +boardId).innerText = likeCount + " 개";
 
-        //let likeDom = document.querySelectorAll(board_like_text_block
     }
 };
 

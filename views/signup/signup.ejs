@@ -14,10 +14,10 @@
 				
 				<div class="form-wrapper">
 				<form class="inputform"  action="/signup" method="POST">
-					<input type="text" class="email" placeholder="Email" name="email"><br/>
-					<input type="text" class="password" placeholder="Password" name="password"><br/>
-					<input type="text" class="nickname" placeholder="NickName" name="nickname"><br/>
-					<input type="text" class="name" placeholder="Name" name="name"><br/>
+					<input type="email" class="email" placeholder="Email" name="email" required><br/>
+					<input type="password"  class="password" placeholder="Password" name="password" required><br/>
+					<input type="text" class="nickname" placeholder="NickName" name="nickname" required><br/>
+					<input type="text" class="name" placeholder="Name" name="name" required><br/>
 					<input type="submit" class="signup" value="SignUP" name="submit">
 					<section class="message"><%= message %></section>
 				</form>

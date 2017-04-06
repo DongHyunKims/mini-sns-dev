@@ -10,7 +10,7 @@ const boardViewModelListPrototype = {
     setBoardViewList : function(){
         this.boardViewList = boardViewList;
     },
-    createBoardViewModelList : function(data){
+    createBoardViewModelList : function(data, userNickname){
 
         data.forEach(function(val){
            let _id = val.boardId;
@@ -22,9 +22,11 @@ const boardViewModelListPrototype = {
            let userNickname = val.userNickname;
            let userProfileImgUrl = val.userProfileImgUrl;
            let userId = val.userId;
-           this.boardViewList.push(new BoardViewModel(_id,boardContent,boardCreatedDate,boardImgUrl,boardPublicState,boardLikeCnt,userNickname,userProfileImgUrl,userId));
+           let likeState = val.likeState;
+
+           this.boardViewList.push(new BoardViewModel(_id,boardContent,boardCreatedDate,boardImgUrl,boardPublicState,boardLikeCnt,userNickname,userProfileImgUrl,userId,likeState));
         }.bind(this));
-        this.renderingMainViewEvent.emit([{"type": "renderingMainViewHandler"}],[this.boardViewList]);
+        this.renderingMainViewEvent.emit([{"type": "renderingMainViewHandler"}],[this.boardViewList,userNickname]);
     },
     deleteBoardViewModel : function(){
 

@@ -25,11 +25,11 @@
             </div>
 
             <div class="menu_block">
+                <div class="nickname_text"></div>
                 <div><a href="http://localhost:3000/board"><img src="../images/icons/Edit-26.png" class="icon_img"/></a></div>
-                <div><img src="../images/icons/Logout%20Rounded%20Up-50.png" class="icon_img"/></div>
+                <div><a href="../../login"><img src="../images/icons/Logout%20Rounded%20Up-50.png" class="icon_img"/></a></div>
             </div>
     </header>
-
 
     <section class="main_section">
         <div class="side_block">
@@ -96,20 +96,27 @@
 
                 <div class="board_like_block">
                     <div class="board_like_img_block">
-                        <input type="hidden" class="board_user_id" value="{{this._id}}_{{this.userId}}"/>
-                        <input type="hidden" class="like_state" value="0">
-                        <img src="../images/icons/Like-50.png" class="icon_img like_btn"/>
+                        <input type="hidden" class="board_id" value="{{this._id}}"/>
+                        <input type="hidden" class="like_state" value={{this.likeState}}>
+                        {{#if this.likeState}}
+                            <img src="../images/icons/Like-Filled-48.png" class="icon_img like_btn"/>
+                        {{else}}
+                            <img src="../images/icons/Like-50.png" class="icon_img like_btn"/>
+                        {{/if}}
                     </div>
-                    <div class="board_like_text_block" id="b_{{this._id}}"></div>
+                    <div class="board_like_text_block" id="b_{{this._id}}">{{this.boardLikeCnt}} 개</div>
                 </div>
 
                 <div class="board_menu_block dropdown">
                     <img src="../images/icons/more-50.png" class="icon_img dropbtn"/>
+                    {{#ifCond this.userNickname}}
                     <div class="board_menu dropdown-content">
-                        <input type="hidden" class="board_id" value="{{this._id}}" />
-                        <div class="board_update" >게시물 수정</div>
+                        <input type="hidden" class="board_id" value="{{this._id}}"/>
+                        <div class="board_update"><a href="../board/updateRenderBoards/{{this._id}}">게시물 수정</a></div>
                         <div class="board_delete">게시물 삭제</div>
                     </div>
+                    {{/ifCond}}
+
                 </div>
             </div>
 
@@ -121,8 +128,11 @@
 
     </div>
     {{/each}}
+
+
 </script>
 
+<script type="text/x-handlebars-template" id="login_nickname">{{userNickname}}</script>
 
 
 
