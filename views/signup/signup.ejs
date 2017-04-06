@@ -14,21 +14,23 @@
 				
 				<div class="form-wrapper">
 				<form class="inputform"  action="/signup" method="POST">
-					<input type="text" class="email" placeholder="Email"><br/>
-					<input type="text" class="password" placeholder="Password"><br/>
-					<input type="text" class="nickname" placeholder="NickName"><br/>
-					<input type="text" class="name" placeholder="Name"><br/>
-					<input type="submit" class="signup" value="submit">
+					<input type="text" class="email" placeholder="Email" name="email"><br/>
+					<input type="text" class="password" placeholder="Password" name="password"><br/>
+					<input type="text" class="nickname" placeholder="NickName" name="nickname"><br/>
+					<input type="text" class="name" placeholder="Name" name="name"><br/>
+					<input type="submit" class="signup" value="SignUP" name="submit">
+					<section class="message"><%= message %></section>
 				</form>
 				<!-- inner<button class="signup" placeholder="SignUP">SignUP</button> -->
 
 				</div>
 
 				<footer class="footer">
-				<div class="footer-inner">로그인 / 아이디비밀번호찾기</div>
+				<div class="footer-inner">아이디/비밀번호 찾기</div>
 				</footer>
 			</div>
 		</section>
+
 	</div>
 	<!-- <form action="/board" method="GET">
 		<input type="submit" name="test">

@@ -158,9 +158,4 @@ function createJson(rows){
     });
 }
 
-
-
-
-
-
 module.exports = router;

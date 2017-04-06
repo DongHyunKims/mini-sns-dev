@@ -1,14 +1,15 @@
 /**
  * Created by donghyunkim on 2017. 3. 28..
  */
+
 const express = require("express");
-const app = express();
 const router = express.Router();
 const path = require("path");
 
 const dbConnection = require("../model/dbConnection");
 
 router.use(express.static('public'));
+
 
 
 const SELECT_ALL_BOARD_SQL = "SELECT * FROM BOARD_TB";
