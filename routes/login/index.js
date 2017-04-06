@@ -5,6 +5,10 @@ var path = require('path')
 
 router.get('/', function(req, res) {
     res.sendFile(path.join(__dirname , "../../public/html/login/login.html"));
+    // var msg;
+    // var errMsg = req.flash('error')
+    // if (errMsg) msg = errMsg;
+    // res.render('login.ejs', {'message' : msg });
 })
 
 module.exports = router; 
