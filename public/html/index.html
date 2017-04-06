@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>INSTABOOK</title>
+
     <link href="../css/index.css" rel="stylesheet" type="text/css"/>
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.js"></script>
+    <script  src="../javascript/lib/timeago.js"></script>
 </head>
 <body>
 
@@ -14,7 +17,7 @@
                     <img src="../images/icons/Instagram-100.png" id="logo_img" class="icon_img"/>
                 </div>
                 <div class="logo_text_block">
-                    <a href="#">INSTABOOK</a>
+                    <a href="http://localhost:3000/main/">INSTABOOK</a>
                 </div>
                 <div class="search_block">
                     <input type="text" placeholder="Search">
@@ -35,52 +38,13 @@
         <div class="middle_block">
             <!-- 게시물 부분, template 등..-->
             <div class="board_side_block"></div>
+
+            <!--게시물이 들어가는 부분 -->
             <div class="board_main_block">
 
-                <div class="board_view_block">
-
-                    <header class="board_header">
-
-                        <div class="board_user_info_block">
-                            <div class="board_profile_img_block"><img class="img-circle" src="../images/default/default-user-image.png"></div>
-                            <div class="board_profile_nickname_block">dongs</div>
-                        </div>
-
-
-                        <div class="board_date_info_block">
-                            3min ago
-                        </div>
-
-                    </header>
-
-                    <section class="board_section">
-                        <img src="../images/default/default-thumbnail.jpg"/>
-                    </section>
-
-                    <footer class="board_footer">
-
-                        <div class="board_like_menu_block">
-
-                                <div class="board_like_block">
-                                    <div class="board_like_img_block"><img src="../images/icons/Thumb%20Up-64.png" class="icon_img"/></div>
-                                    <div class="board_like_text_block">14개</div>
-                                </div>
-
-                                <div class="board_menu_block">
-                                    <img src="../images/icons/more-50.png" class="icon_img"/>
-                                </div>
-
-                        </div>
-
-
-                        <div class="board_write_block">
-                            <div class="board_content_block">와 여기 진짜 맛있네요!!!</div>
-                        </div>
-
-                    </footer>
-                </div>
-
             </div>
+
+
             <div class="board_side_block"></div>
 
         </div>
@@ -95,6 +59,71 @@
     <footer class="main_footer">
 
     </footer>
+
+<script src="../javascript/utility/utility.js"></script>
+<script src="../javascript/main/controller/Observer.js"></script>
+<script src="../javascript/main/model/BoardViewModel.js"></script>
+<script src="../javascript/main/model/BoardViewModelList.js"></script>
+<script src="../javascript/main/view/MainView.js"></script>
+<script src="../javascript/main/controller/MainController.js"></script>
+<script src="../javascript/main/init.js"></script>
+
+<script  type="text/x-handlebars-template" id="board_view">
+    {{#each boardViewlist}}
+    <div class="board_view_block">
+
+
+        <header class="board_header">
+
+        <div class="board_user_info_block">
+            <div class="board_profile_img_block"><img class="img-circle" src="{{this.userProfileImgUrl}}"></div>
+            <div class="board_profile_nickname_block">{{this.userNickname}}</div>
+        </div>
+
+        <div class="board_date_info_block">
+            {{this.boardCreatedDate}}
+        </div>
+        </header>
+
+        <section class="board_section">
+         <img src="{{this.boardImgUrl}}"/>
+        </section>
+
+
+        <footer class="board_footer">
+
+            <div class="board_like_menu_block">
+
+                <div class="board_like_block">
+                    <div class="board_like_img_block">
+                        <input type="hidden" class="board_user_id" value="{{this._id}}_{{this.userId}}"/>
+                        <input type="hidden" class="like_state" value="0">
+                        <img src="../images/icons/Like-50.png" class="icon_img like_btn"/>
+                    </div>
+                    <div class="board_like_text_block" id="b_{{this._id}}"></div>
+                </div>
+
+                <div class="board_menu_block dropdown">
+                    <img src="../images/icons/more-50.png" class="icon_img dropbtn"/>
+                    <div class="board_menu dropdown-content">
+                        <input type="hidden" class="board_id" value="{{this._id}}" />
+                        <div class="board_update" >게시물 수정</div>
+                        <div class="board_delete">게시물 삭제</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="board_write_block">
+                <div class="board_content_block">{{this.boardContent}}</div>
+            </div>
+
+        </footer>
+
+    </div>
+    {{/each}}
+</script>
+
+
 
 
 </body>

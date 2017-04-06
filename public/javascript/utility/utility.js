@@ -1,7 +1,7 @@
 /**
  * Created by donghyunkim on 2017. 4. 3..
  */
-var utility = {
+const utility = {
     $ : document,
     $selector : function(selector){
         return document.querySelector(selector);
@@ -12,7 +12,7 @@ var utility = {
         //reqListener 제일 마지막에 실행된다.
         xhr.addEventListener("load", reqListener);
         xhr.open(method, url);
-        oReq.send();
+        xhr.send();
     },
     runAjaxData : function(reqListener, method, url, data, contentType){
 
@@ -21,8 +21,9 @@ var utility = {
 
         xhr.open(method, url);
         //xhr.setRequestHeader("Content-Type","application/json");
-        if(contentType !== undefined)
+        if(contentType !== undefined){
         xhr.setRequestHeader("Content-Type",contentType);
+        }
 
         xhr.send(data);
         xhr.addEventListener("load", reqListener);
@@ -38,3 +39,4 @@ var utility = {
         return obj;
     }
 };
+

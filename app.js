@@ -1,6 +1,7 @@
 /**
  * Created by donghyunkim on 2017. 3. 28..
  */
+
 var express = require("express");
 var app = express();
 var main = require("./routes");
@@ -20,9 +21,10 @@ app.use(session({
     resave: false,
     saveUninitialized: true
 }))
-app.use(passport.initialize())
-app.use(passport.session())
-app.use(flash())
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
 
 app.use(express.static('public'));
 app.use(bodyParser.json());
