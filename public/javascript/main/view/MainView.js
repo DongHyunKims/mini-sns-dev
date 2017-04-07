@@ -5,7 +5,7 @@
 
 const mainViewPrototype = {
 
-    render : function(boardViewlModelist,userNickname) {
+    render : function(boardViewlModelist,user) {
         let mainTemplate = document.querySelector("#board_view").innerText;
         //1. 등록한 mainTemplate을 compile 함
         let template = Handlebars.compile(mainTemplate);
@@ -15,11 +15,14 @@ const mainViewPrototype = {
             return boardViewlModelist;
         });
 
+        Handlebars.registerHelper("userId", function () {
+            return user._ID;
+        });
 
         Handlebars.registerHelper('ifCond', function(lvalue, options) {
             if (arguments.length < 2)
                 throw new Error("Handlebars Helper equal needs 2 parameters");
-            if( lvalue!=userNickname ) {
+            if( lvalue!=user.USER_NICKNAME) {
                 return options.inverse(this);
             } else {
                 return options.fn(this);
@@ -28,7 +31,7 @@ const mainViewPrototype = {
 
 
         //3. json 데이터 삽입
-        mainTemplate = template({"boardViewlist": boardViewlModelist});
+        mainTemplate = template({"boardViewlist": boardViewlModelist, userId : user._ID});
         this.renderingDom.innerHTML = mainTemplate;
         this._createTimeAgo();
         this._setEvent();
@@ -38,10 +41,10 @@ const mainViewPrototype = {
 
         let nameRendertemplate = Handlebars.compile(nameTemplate);
         Handlebars.registerHelper("userNickname", function () {
-            return userNickname;
+            return user.USER_NICKNAME;
         });
 
-        nameTemplate = nameRendertemplate({userNickname:userNickname});
+        nameTemplate = nameRendertemplate({userNickname: user.USER_NICKNAME});
         let nameRenderingDom = document.querySelector(".nickname_text");
         nameRenderingDom.innerText = nameTemplate;
 
@@ -65,7 +68,6 @@ const mainViewPrototype = {
         }.bind(this));
 
 
-
         dropDownDom.addEventListener("click",function(event){
             let likeDom = event.target;
 
@@ -83,6 +85,22 @@ const mainViewPrototype = {
                 this.checkLikeEvent.emit([{"type":"checkLikeBoardHandler"}],[_id,state,this._likeBoardReqListener]);
             }
         }.bind(this));
+
+
+        dropDownDom.addEventListener("click",function(event){
+            let profileDom = event.target;
+
+            if(profileDom.id === "profile_update_btn"){
+
+                let profileImgFile = utility.$selector("#profileimg_file_input").files[0];
+
+                let profileFormData = new FormData();
+                profileFormData.append("profileImgFile", profileImgFile);
+
+                this.updateProfileEvent.emit([{"type":"updateProfileHandler"}],[this._updateProfileReqListener,profileFormData]);
+            }
+        }.bind(this));
+
 
     },
     _createTimeAgo : function(){
@@ -106,7 +124,11 @@ const mainViewPrototype = {
 
         utility.$selector("#b_" +boardId).innerText = likeCount + " 개";
 
+    },
+    _updateProfileReqListener : function(){
+        window.location.reload();
     }
+
 };
 
 function MainView(renderingDom){
@@ -114,6 +136,7 @@ function MainView(renderingDom){
     this.initMainViewEvent = new Observer();
     this.boardDeleteEvent = new Observer();
     this.checkLikeEvent = new Observer();
+    this.updateProfileEvent = new Observer();
 }
 
 MainView.prototype = mainViewPrototype;

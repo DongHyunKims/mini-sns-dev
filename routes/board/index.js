@@ -42,8 +42,19 @@ const storage = multer.diskStorage({
         callback(null, file.fieldname+ '-' + Date.now() + "." +file.mimetype.split("/")[1])
     }
 });
-
 const upload = multer({ storage: storage });
+
+
+const profileStorage = multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, 'public/images/uploads/profile');
+    },
+    filename: function (req, file, callback) {
+        callback(null, file.fieldname+ '-' + Date.now() + "." +file.mimetype.split("/")[1])
+    }
+});
+
+const profileUpload = multer({ storage: profileStorage });
 
 
 
@@ -68,6 +79,7 @@ const DELETE_LIKE_BOARD_SQL = "DELETE FROM LIKE_TB WHERE BOARD_ID=?;";
 const INSERT_LIKE_SQL = "INSERT INTO LIKE_TB VALUES(DEFAULT,?,?);";
 const DELETE_LIKE_SQL = "DELETE FROM LIKE_TB WHERE USER_ID=? AND BOARD_ID=?;";
 const SELECT_LIKE_SQL = "SELECT count(*) as count, BOARD_ID as boardId FROM LIKE_TB WHERE BOARD_ID=?;";
+const UPDATE_PROFILE_SQL = "UPDATE USER_TB SET USER_PROFILE_IMG_URL = ? WHERE _ID=?;";
 const SELECT_LIKE_GROUP_SQL = "SELECT count(*) as count, BOARD_ID as boardId FROM LIKE_TB group by BOARD_ID;";
 
 
@@ -98,10 +110,10 @@ router.post("/insertBoard",upload.single('imgFile'),function(req,res){
 
 
 
-// 게시물 작성
+// 게시물 수정
 router.post("/updateBoard",upload.single('imgFile'),function(req,res){
     let data = req.body;
-    console.log("data",data);
+   // console.log("data",data);
     let imgUrl = req.file.path;
     imgUrl = imgUrl.slice(imgUrl.indexOf("/"));
     //session 처리
@@ -122,14 +134,14 @@ router.post("/updateBoard",upload.single('imgFile'),function(req,res){
 router.get("/getBoards",function(req,res){
     let session = req.session.user;
     let user_id = Number(session._ID);
-    
+
     dbConnection.query(SELECT_ALL_BOARD_VIEW_SQL,[user_id],function(err, rows){
         if(err) throw err;
         else if(rows.length === 0) console.log("no data");
         else{
             let jsonData = rows;
             //console.log(jsonData);
-            res.json({boardList : jsonData, userNickname : session.USER_NICKNAME});
+            res.json({boardList : jsonData, user : session});
         }
     });
 
@@ -146,7 +158,7 @@ router.get("/updateRenderBoards/:id",function(req,res){
         if(err) throw err;
         else if(rows.length === 0) console.log("no data");
         else{
-            console.log( rows[0]);
+            //console.log( rows[0]);
 
             res.render("board/boardUpdate",{boardModel: rows[0]});
         }
@@ -202,11 +214,28 @@ router.post("/checkLikeBoards",function(req,res){
 });
 
 
-function createJson(rows){
-    return rows.map(function(val){
-        //console.log("val",val);
-        return val;
+
+router.post("/updateProfile",profileUpload.single("profileImgFile"),function(req,res){
+    let profileImgUrl = req.file.path;
+    //console.log("profileImgUrl",profileImgUrl);
+
+    profileImgUrl = profileImgUrl.slice(profileImgUrl.indexOf("/"));
+
+
+    let session = req.session.user;
+    let user_id = Number(session._ID);
+    if(profileImgUrl === "" || profileImgUrl === undefined) profileImgUrl  = "images/default/default_profile.png";
+
+    dbConnection.query(UPDATE_PROFILE_SQL,[profileImgUrl,user_id],function(err, rows){
+        if(err) throw err;
+        else if(rows.length === 0) console.log("no data");
+        else{
+
+            res.status(200).send();
+        }
     });
-}
+
+});
+
 
 module.exports = router;

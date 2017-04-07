@@ -29,7 +29,7 @@ const defaultUrl = "http://localhost:3000";
     function reqListener() {
         let jsonDatas = JSON.parse(this.responseText);
 
-        mainView.initMainViewEvent.emit([{"type": "initMainViewHandler"}], [jsonDatas.boardList,jsonDatas.userNickname]);
+        mainView.initMainViewEvent.emit([{"type": "initMainViewHandler"}], [jsonDatas.boardList,jsonDatas.user]);
     }
 
     document.addEventListener("DOMContentLoaded",utility.runAjax(reqListener,"GET",defaultUrl + "/board/getBoards"));

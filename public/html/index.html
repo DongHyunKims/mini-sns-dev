@@ -32,6 +32,8 @@
     </header>
 
     <section class="main_section">
+
+
         <div class="side_block">
         </div>
 
@@ -41,6 +43,8 @@
 
             <!--게시물이 들어가는 부분 -->
             <div class="board_main_block">
+
+
 
             </div>
 
@@ -69,6 +73,11 @@
 <script src="../javascript/main/init.js"></script>
 
 <script  type="text/x-handlebars-template" id="board_view">
+
+    <div class="profile_upload_block">
+        <input id="profileimg_file_input" type="file"/>
+        <img src="../images/icons/Plus-96.png" id="profile_update_btn" >
+    </div>
     {{#each boardViewlist}}
     <div class="board_view_block">
 
