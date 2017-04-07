@@ -122,15 +122,13 @@ router.post("/updateBoard",upload.single('imgFile'),function(req,res){
 router.get("/getBoards",function(req,res){
     let session = req.session.user;
     let user_id = Number(session._ID);
-
-
+    
     dbConnection.query(SELECT_ALL_BOARD_VIEW_SQL,[user_id],function(err, rows){
         if(err) throw err;
         else if(rows.length === 0) console.log("no data");
         else{
             let jsonData = rows;
             //console.log(jsonData);
-
             res.json({boardList : jsonData, userNickname : session.USER_NICKNAME});
         }
     });

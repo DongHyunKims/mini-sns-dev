@@ -25,19 +25,19 @@
 
     let btnDom = utility.$selector("#confirm_btn");
     let url = "insertBoard";
-
     if( btnDom === null) {
         btnDom =utility.$selector("#update_btn");
         url = "updateBoard";
     }
 
-
-
     btnDom.addEventListener("click", function () {
         let content = utility.$selector("#content_box").value;
         let imgFile = utility.$selector("#img-file-input").files[0];
         let state = utility.$selector("#state_toggle > input").value;
-        let boardId = utility.$selector("#boardId").value;
+        let boardId = undefined;
+        if(utility.$selector("#boardId") !== null) {
+             boardId = utility.$selector("#boardId").value;
+        }
 
 
         if (content === "") {
@@ -51,7 +51,9 @@
             formData.append("imgFile", imgFile);
             formData.append("content", content);
             formData.append("state", state);
-            formData.append("boardId", boardId);
+            if(boardId !== undefined){
+                formData.append("boardId", boardId);
+            }
             utility.runAjaxData(reqListener, "post", defaultURL + "/board/"+url, formData);
         }
     });
@@ -60,8 +62,6 @@
         console.log(res);
         window.location = '/main';
     }
-
-
 
 
 })();
