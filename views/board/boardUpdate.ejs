@@ -45,7 +45,7 @@
                 </div>
                 <!--<form id="board_write_form">-->
                 <div class="board_textarea_block">
-                        <textarea  placeholder="Write Something…" name="content" id="content_box" required></textarea>
+                    <textarea  placeholder="Write Something…" name="content" id="content_box" required ><%=boardModel.BOARD_CONTENT%></textarea>
                 </div>
                 <div class="board_button_block">
                     <div class="board_upload_block">
@@ -62,7 +62,8 @@
                             <input type="checkbox" value="1">
                             <div class="slider round"></div>
                         </label>
-                        <button class="btn success" id="confirm_btn">Comfirm</button>
+                        <input id="boardId" type="hidden" value=<%=boardModel._ID%> />
+                        <button class="btn success" id="update_btn">Comfirm</button>
                     </div>
                 </div>
                 <!--</form>-->
