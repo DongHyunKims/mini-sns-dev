@@ -23,20 +23,38 @@
         }
     });
 
-    utility.$selector("#confirm_btn").addEventListener("click",function(){
+    let btnDom = utility.$selector("#confirm_btn");
+    let url = "insertBoard";
+    if( btnDom === null) {
+        btnDom =utility.$selector("#update_btn");
+        url = "updateBoard";
+    }
+
+    btnDom.addEventListener("click", function () {
         let content = utility.$selector("#content_box").value;
         let imgFile = utility.$selector("#img-file-input").files[0];
         let state = utility.$selector("#state_toggle > input").value;
+        let boardId = undefined;
+        if(utility.$selector("#boardId") !== null) {
+             boardId = utility.$selector("#boardId").value;
+        }
 
-        if(content===""){
+
+        if (content === "") {
             alert("내용을 입력 해 주세요!!");
         }
+        else if (imgFile === undefined) {
+            alert("사진을 첨부해주세요!!");
+        }
         else {
-            var formData = new FormData();
+            let formData = new FormData();
             formData.append("imgFile", imgFile);
             formData.append("content", content);
             formData.append("state", state);
-            utility.runAjaxData(reqListener, "post", defaultURL + "/board/insertBoard",formData );
+            if(boardId !== undefined){
+                formData.append("boardId", boardId);
+            }
+            utility.runAjaxData(reqListener, "post", defaultURL + "/board/"+url, formData);
         }
     });
 
@@ -44,6 +62,7 @@
         console.log(res);
         window.location = '/main';
     }
+
 
 })();
 

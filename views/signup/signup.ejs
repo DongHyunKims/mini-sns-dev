@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>InstaBook</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="./../../css/signup/signup.css">
+</head>
+<body>
+	<div class="wrap">
+		<section class="main">
+			<div class="content-wrap">
+				<div class="logo">InstaBook
+				</div>
+				
+				<div class="form-wrapper">
+				<form class="inputform"  action="/signup" method="POST">
+					<input type="email" class="email" placeholder="Email" name="email" required><br/>
+					<input type="password"  class="password" placeholder="Password" name="password" required><br/>
+					<input type="text" class="nickname" placeholder="NickName" name="nickname" required><br/>
+					<input type="text" class="name" placeholder="Name" name="name" required><br/>
+					<input type="submit" class="signup" value="SignUP" name="submit">
+					<section class="message"><%= message %></section>
+				</form>
+				<!-- inner<button class="signup" placeholder="SignUP">SignUP</button> -->
+
+				</div>
+
+				<footer class="footer">
+				<div class="footer-inner">아이디/비밀번호 찾기</div>
+				</footer>
+			</div>
+		</section>
+
+	</div>
+	<!-- <form action="/board" method="GET">
+		<input type="submit" name="test">
+	</form> -->
+	<script type="text/javascript" src="./../../javascript/signup/signup.js"></script>
+</body>
+</html>

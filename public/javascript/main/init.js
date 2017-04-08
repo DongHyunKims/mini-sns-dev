@@ -26,12 +26,10 @@ const defaultUrl = "http://localhost:3000";
 
 
     //ajax 콜백함수
-    function reqListener(res) {
-        //console.log("res",res);
+    function reqListener() {
         let jsonDatas = JSON.parse(this.responseText);
-        //console.log(JSON.stringify(jsonDatas));
-        //console.log("mainController",mainController);
-        mainView.initMainViewEvent.emit([{"type": "initMainViewHandler"}], [jsonDatas]);
+
+        mainView.initMainViewEvent.emit([{"type": "initMainViewHandler"}], [jsonDatas.boardList,jsonDatas.user]);
     }
 
     document.addEventListener("DOMContentLoaded",utility.runAjax(reqListener,"GET",defaultUrl + "/board/getBoards"));

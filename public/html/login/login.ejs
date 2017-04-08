@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="InstaBook login page">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>InstaBook Login</title>
+        <link rel="stylesheet" href="../../css/login/login.css" type="text/css">
+    </head>
+    <body>
+        <div class="main">
+                <div class="main__logo">
+                    <img class="logo" src="../../images/icons/instagram-50.png" />
+                    <h1>INSTABOOK</h1>
+                </div>  
+                <!--form-->
+                <form action="/user_info" method="post">  
+                <div class="main__input main__input--user">
+                    <input type="email" class="input" name="email" maxlength="50" placeholder="Email" required>
+                </div>
+                <div class="main__input main__input--password">
+                    <input type="password" class="input" name="password" maxlength="50" placeholder="Password" required>
+                </div>
+                <div class="main__button">
+                    <input type="submit" class="btn-login" name="btn-login" value="Log in"><a href="#"></a>
+                </div> 
+                </form>
+                <section class="messages"> <%= message %> </section>
+                <!--form--> 
+                <hr>
+                <div class="main__sign-up" name="sign-up">
+                    <a href="#">회원가입</a> 
+                </div>         
+        </div>
+
+    </body>    
+</html>
