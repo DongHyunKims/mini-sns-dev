@@ -55,11 +55,17 @@ const boardViewPrototype = {
     },
     setBoardLikeCnt : function(boardLikeCnt){
         this.boardLikeCnt = boardLikeCnt;
+    },
+    getLikeState : function(){
+        return this.likeState;
+    },
+    setLikeState: function(likeState){
+        this.likeState = likeState;
     }
 };
 
 
-function BoardViewModel(_id,boardContent,boardCreatedDate,boardImgUrl,boardPublicState,boardLikeCnt,userNickname,userProfileImgUrl,userId) {
+function BoardViewModel(_id,boardContent,boardCreatedDate,boardImgUrl,boardPublicState,boardLikeCnt,userNickname,userProfileImgUrl,userId,likeState) {
     this._id = _id;
     this.boardContent = boardContent;
     this.boardCreatedDate = boardCreatedDate;
@@ -69,6 +75,7 @@ function BoardViewModel(_id,boardContent,boardCreatedDate,boardImgUrl,boardPubli
     this.userNickname = userNickname;
     this.userProfileImgUrl = userProfileImgUrl;
     this.userId = userId;
+    this.likeState = likeState
 }
 
 BoardViewModel.prototype = boardViewPrototype;
