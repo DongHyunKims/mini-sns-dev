@@ -94,10 +94,14 @@ const mainViewPrototype = {
 
                 let profileImgFile = utility.$selector("#profileimg_file_input").files[0];
 
-                let profileFormData = new FormData();
-                profileFormData.append("profileImgFile", profileImgFile);
+                if (profileImgFile === undefined) {
+                    alert("프로필 사진을 첨부해주세요!!");
+                }else {
+                    let profileFormData = new FormData();
+                    profileFormData.append("profileImgFile", profileImgFile);
 
-                this.updateProfileEvent.emit([{"type":"updateProfileHandler"}],[this._updateProfileReqListener,profileFormData]);
+                    this.updateProfileEvent.emit([{"type": "updateProfileHandler"}], [this._updateProfileReqListener, profileFormData]);
+                }
             }
         }.bind(this));
 
